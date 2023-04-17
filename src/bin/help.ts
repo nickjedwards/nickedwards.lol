@@ -1,10 +1,10 @@
 import * as bin from './index'
 
 export const help = {
-  description: 'Display this help message',
+  description: '\t\tDisplay this help message',
   command(args: string[]): string {
     const commands = Object.entries(bin).map(([key, value]) => {
-      return `<span class="text-green-500">${key}</span>\t${value.description}`
+      return `<span class="text-green-500">${key}</span>${value.description}`
     }).sort()
 
     return `

@@ -1,5 +1,5 @@
 export const echo = {
-  description: 'Display a line of text',
+  description: '\t\tDisplay a line of text',
   command(args: string[]): string {
     return args.join(' ')
   },

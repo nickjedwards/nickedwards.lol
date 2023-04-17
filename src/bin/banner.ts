@@ -1,5 +1,5 @@
 export const banner = {
-  description: 'Display the header',
+  description: '\tDisplay the header',
   command(args: string[]): string {
     return `
 ███╗   ██╗██╗ ██████╗██╗  ██╗    ███████╗██████╗ ██╗    ██╗ █████╗ ██████╗ ██████╗ ███████╗
