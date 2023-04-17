@@ -3,23 +3,34 @@ import { KeyboardEvent, useEffect, useRef, useState } from 'react'
 import Motd from './components/Motd'
 import History from './components/History'
 import Ps1 from './components/Ps1'
-import { useShell } from './context/ShellContext';
+import { useShell } from './context/ShellContext'
 
 export default function App() {
   const [value, setValue] = useState('')
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null)
-  const { execute, clearHistory, history,  setHistory } = useShell();
+  const {
+    execute,
+    clearHistory,
+    history,
+    lastCommandIndex,
+    setHistory,
+    setLastCommandIndex
+  } = useShell()
 
   useEffect(() => {
-    containerRef.current?.scrollTo(0, containerRef.current.scrollHeight);
-  }, [history]);
+    containerRef.current?.scrollTo(0, containerRef.current.scrollHeight)
+  }, [history])
 
   const onClickAnywhere = () => {
     inputRef.current?.focus()
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    const commands: string[] = history
+      .map(({ command }) => command)
+      .filter((value: string) => value);
+
     if (event.key === 'c' && event.ctrlKey) {
       event.preventDefault()
 
@@ -31,6 +42,35 @@ export default function App() {
       event.preventDefault()
 
       clearHistory()
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+
+      if (!commands.length) return
+
+      const index: number = lastCommandIndex + 1
+
+      if (index <= commands.length) {
+        setLastCommandIndex(index);
+        setValue(commands[commands.length - index])
+      }
+    }
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault()
+
+      if (!commands.length) return
+
+      const index: number = lastCommandIndex - 1
+
+      if (index > 0) {
+        setLastCommandIndex(index);
+        setValue(commands[commands.length - index]);
+      } else {
+        setLastCommandIndex(0);
+        setValue('');
+      }
     }
 
     if (event.key === 'Enter' || event.code === '13') {

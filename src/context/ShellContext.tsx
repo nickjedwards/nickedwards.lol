@@ -4,10 +4,12 @@ import * as bin from '../bin'
 import { History } from '../types/History'
 
 type Context = {
-  clearHistory: () => void
-  execute: (setCommand: string) => void
+  clearHistory(): void
+  execute(setCommand: string): void
   history: History[]
-  setHistory: (command: string, stdout: string) => void
+  lastCommandIndex: number
+  setHistory(command: string, stdout: string): void
+  setLastCommandIndex(index: number): void
 }
 
 type Stderr = {
@@ -22,7 +24,9 @@ const ShellContext = createContext<Context>({
   clearHistory() {},
   execute(command: string) {},
   history: [],
+  lastCommandIndex: 0,
   setHistory(command: string, stdout: string) {},
+  setLastCommandIndex(index: number) {},
 })
 
 export function useShell() {
@@ -31,6 +35,7 @@ export function useShell() {
 
 export default function ShellProvider({ children }: Props) {
   const [history, _setHistory] = useState<History[]>([])
+  const [lastCommandIndex, setLastCommandIndex] = useState<number>(0)
 
   const setHistory = (command: string, stdout: string) => {
     _setHistory((previous) => [
@@ -77,5 +82,17 @@ export default function ShellProvider({ children }: Props) {
     setHistory(command, stdout);
   };
 
-  return <ShellContext.Provider value={{ clearHistory, execute, history, setHistory }}>{children}</ShellContext.Provider>
+  return (
+    <ShellContext.Provider
+      value={{
+        clearHistory,
+        execute,
+        history,
+        lastCommandIndex,
+        setHistory,
+        setLastCommandIndex
+      }}>
+        {children}
+    </ShellContext.Provider>
+  )
 }
