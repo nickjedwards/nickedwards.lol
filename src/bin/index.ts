@@ -1,2 +1,5 @@
+export * from './echo'
+export * from './email'
+export * from './git'
 export * from './help'
 export * from './banner'

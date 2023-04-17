@@ -12,8 +12,8 @@ export default function Motd() {
         Welcome to Nick Edwards {`${major}.${minor}.${patch}`} LOL (NJE/Edwards 5.6.91-generic x86_64)
       </p>
       <p
-        className="text-white whitespace-pre-wrap"
-        dangerouslySetInnerHTML={{ __html: banner() }}
+        className="mt-4 text-white whitespace-pre-wrap"
+        dangerouslySetInnerHTML={{ __html: banner.command() }}
       />
     </div>
   )

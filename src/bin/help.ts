@@ -1,19 +1,23 @@
 import * as bin from './index'
 
-export function help() {
-  const commands = Object.keys(bin).sort().join(', ');
+export const help = {
+  description: 'Display this help message',
+  command(args: string[]): string {
+    const commands = Object.entries(bin).map(([key, value]) => {
+      return `<span class="text-green-500">${key}</span>\t${value.description}`
+    }).sort()
 
-  // return `Available commands:\n${commands}\n\n[ctrl+l]\t clear terminal.\n[ctrl+c]\t cancel command.`;
+    return `
+nickedwards.lol <span class="text-green-500">1.0.0</span>
 
-  return `
-Usage:
+<span class="text-yellow-500">Usage:</span>
   command [arguments]
 
-Available commands:
-  banner\t Display the header
-  help\t\t Display this help message
+<span class="text-yellow-500">Available commands:</span>
+  ${commands.join('\n  ')}
 
-[ctrl+l]\t clear terminal
-[ctrl+c]\t cancel command
+[ctrl+l]\tClear terminal
+[ctrl+c]\tCancel command
 `.trim()
+  },
 }

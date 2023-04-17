@@ -49,7 +49,7 @@ export default function ShellProvider({ children }: Props) {
   }
 
   const execute = (command: string) => {
-    const [executable, ...args] = [Date.now().toString(), command].slice(1)
+    const [executable, ...args] = command.split(' ')
 
     let stdout = ''
 
@@ -67,14 +67,14 @@ export default function ShellProvider({ children }: Props) {
           stdout = `Bash: command not found: ${executable}`
         } else {
           try {
-            stdout = bin[executable]()
+            stdout = bin[executable].command(args)
           } catch (error) {
             stdout = (error as Stderr).stderr
           }
         }
     }
 
-    setHistory(executable, stdout);
+    setHistory(command, stdout);
   };
 
   return <ShellContext.Provider value={{ clearHistory, execute, history, setHistory }}>{children}</ShellContext.Provider>
