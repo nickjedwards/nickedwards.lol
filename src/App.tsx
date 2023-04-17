@@ -1,4 +1,4 @@
-import { KeyboardEvent, useRef, useState } from 'react'
+import { KeyboardEvent, useEffect, useRef, useState } from 'react'
 
 import Motd from './components/Motd'
 import History from './components/History'
@@ -7,8 +7,13 @@ import { useShell } from './context/ShellContext';
 
 export default function App() {
   const [value, setValue] = useState('')
+  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null)
   const { execute, clearHistory, history,  setHistory } = useShell();
+
+  useEffect(() => {
+    containerRef.current?.scrollTo(0, containerRef.current.scrollHeight);
+  }, [history]);
 
   const onClickAnywhere = () => {
     inputRef.current?.focus()
@@ -38,7 +43,7 @@ export default function App() {
   };
 
   return (
-    <div className="h-full p-2" onClick={onClickAnywhere}>
+    <div ref={containerRef} className="overflow-y-auto h-full p-2" onClick={onClickAnywhere}>
       {/* Message of the day */}
       <Motd />
 
