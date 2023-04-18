@@ -1,4 +1,4 @@
-export interface History {
+export default interface History {
   id: number;
   date: Date;
   command: string;

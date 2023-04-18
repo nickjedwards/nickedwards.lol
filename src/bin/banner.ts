@@ -1,6 +1,8 @@
-export const banner = {
+import Bin from "../types/Bin"
+
+export const banner: Bin = {
   description: '\tDisplay the header',
-  command(args: string[]): string {
+  run(args: string[]): string {
     return `
 ███╗   ██╗██╗ ██████╗██╗  ██╗    ███████╗██████╗ ██╗    ██╗ █████╗ ██████╗ ██████╗ ███████╗
 ████╗  ██║██║██╔════╝██║ ██╔╝    ██╔════╝██╔══██╗██║    ██║██╔══██╗██╔══██╗██╔══██╗██╔════╝

@@ -1,8 +1,9 @@
 import * as bin from './index'
+import Bin from '../types/Bin'
 
-export const help = {
+export const help: Bin = {
   description: '\t\tDisplay this help message',
-  command(args: string[]): string {
+  run(args: string[]): string {
     const commands = Object.entries(bin).map(([key, value]) => {
       return `<span class="text-green-500">${key}</span>${value.description}`
     }).sort()

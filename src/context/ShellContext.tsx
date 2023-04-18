@@ -1,7 +1,8 @@
 import { ReactElement, createContext, useContext, useState } from 'react'
 
 import * as bin from '../bin'
-import { History } from '../types/History'
+import History from '../types/History'
+import Bin from '../types/Bin'
 
 type Context = {
   clearHistory(): void
@@ -72,7 +73,7 @@ export default function ShellProvider({ children }: Props) {
           stdout = `Bash: command not found: ${executable}`
         } else {
           try {
-            stdout = bin[executable].command(args)
+            stdout = (bin as {[key: string]: Bin})[executable].run(args)
           } catch (error) {
             stdout = (error as Stderr).stderr
           }

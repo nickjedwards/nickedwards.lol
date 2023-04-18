@@ -13,7 +13,7 @@ export default function Motd() {
       </p>
       <p
         className="mt-4 text-white whitespace-pre-wrap"
-        dangerouslySetInnerHTML={{ __html: banner.command() }}
+        dangerouslySetInnerHTML={{ __html: banner.run([]) }}
       />
     </div>
   )

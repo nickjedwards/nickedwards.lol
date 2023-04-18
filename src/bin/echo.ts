@@ -1,6 +1,8 @@
-export const echo = {
+import Bin from "../types/Bin"
+
+export const echo: Bin = {
   description: '\t\tDisplay a line of text',
-  command(args: string[]): string {
+  run(args: string[]): string {
     return args.join(' ')
   },
 }
