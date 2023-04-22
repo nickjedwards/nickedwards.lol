@@ -94,8 +94,8 @@ export default function App() {
       <History history={history} />
 
       <div className="mt-4 font-medium text-sm">
-        {/* PS1 */}
         <label htmlFor="prompt" className="flex space-x-2">
+          {/* PS1 */}
           <div className="flex-shrink">
             <Ps1 />
           </div>
