@@ -34,7 +34,11 @@ export default function App() {
     if (event.key === 'c' && event.ctrlKey) {
       event.preventDefault()
 
-      setHistory(value, '')
+      setHistory({
+        id: Date.now(),
+        command: value,
+        stdout: '',
+      })
       setValue('')
     }
 
@@ -76,8 +80,7 @@ export default function App() {
     if (event.key === 'Enter' || event.code === '13') {
       event.preventDefault()
 
-      execute(value)
-
+      setHistory(execute(value))
       setValue('')
     }
   };
@@ -90,27 +93,29 @@ export default function App() {
       {/* Command history */}
       <History history={history} />
 
-      <div className="mt-4 flex space-x-2 font-medium text-sm">
+      <div className="mt-4 font-medium text-sm">
         {/* PS1 */}
-        <label htmlFor="prompt" className="flex-shrink">
-          <Ps1 />
-        </label>
+        <label htmlFor="prompt" className="flex space-x-2">
+          <div className="flex-shrink">
+            <Ps1 />
+          </div>
 
-        {/* Prompt */}
-        <input
-          ref={inputRef}
-          id="prompt"
-          type="text"
-          className="flex-grow bg-fuchsia-950 text-white focus:outline-none"
-          aria-label="prompt"
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-          autoFocus
-          onKeyDown={onKeyDown}
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="off"
-        />
+          {/* Prompt */}
+          <input
+            ref={inputRef}
+            id="prompt"
+            type="text"
+            className="flex-grow bg-fuchsia-950 text-white focus:outline-none"
+            aria-label="prompt"
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
+            autoFocus
+            onKeyDown={onKeyDown}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+          />
+        </label>
       </div>
     </div>
   )

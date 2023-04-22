@@ -5,6 +5,6 @@ export const git: Bin = {
   run(args: string[]): string {
     setTimeout(() => window.open('https://github.com/nickjedwards'), 1000)
 
-    return 'Opening Github'
+    return 'Opening Github (https://github.com/nickjedwards)'
   },
 }

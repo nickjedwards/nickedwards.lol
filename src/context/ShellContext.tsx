@@ -6,10 +6,10 @@ import Bin from '../types/Bin'
 
 type Context = {
   clearHistory(): void
-  execute(setCommand: string): void
+  execute(command: string): History
   history: History[]
   lastCommandIndex: number
-  setHistory(command: string, stdout: string): void
+  setHistory(history: History): void
   setLastCommandIndex(index: number): void
 }
 
@@ -23,10 +23,10 @@ type Props = {
 
 const ShellContext = createContext<Context>({
   clearHistory() {},
-  execute(command: string) {},
+  execute: (command: string) => ({} as History),
   history: [],
   lastCommandIndex: 0,
-  setHistory(command: string, stdout: string) {},
+  setHistory(history: History) {},
   setLastCommandIndex(index: number) {},
 })
 
@@ -38,23 +38,13 @@ export default function ShellProvider({ children }: Props) {
   const [history, _setHistory] = useState<History[]>([])
   const [lastCommandIndex, setLastCommandIndex] = useState<number>(0)
 
-  const setHistory = (command: string, stdout: string) => {
-    _setHistory((previous) => [
-      ...previous,
-      {
-        id: previous.length,
-        date: new Date(),
-        command,
-        stdout,
-      },
-    ])
+  const setHistory = (history: History) => {
+    _setHistory((previous) => [...previous, history])
   }
 
-  const clearHistory = () => {
-    _setHistory([])
-  }
+  const clearHistory = () => _setHistory([])
 
-  const execute = (command: string) => {
+  const execute = (command: string): History => {
     const [executable, ...args] = command.split(' ')
 
     let stdout = ''
@@ -80,7 +70,11 @@ export default function ShellProvider({ children }: Props) {
         }
     }
 
-    setHistory(command, stdout);
+    return {
+      id: Date.now(),
+      command,
+      stdout,
+    }
   };
 
   return (
