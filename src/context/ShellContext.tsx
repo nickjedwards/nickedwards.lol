@@ -60,7 +60,7 @@ export default function ShellProvider({ children }: Props) {
 
       default:
         if (Object.keys(bin).indexOf(executable) === -1) {
-          stdout = `Bash: command not found: ${executable}`
+          stdout = `${executable}: command not found`
         } else {
           try {
             stdout = (bin as {[key: string]: Bin})[executable].run(args)
