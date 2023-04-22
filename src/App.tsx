@@ -22,9 +22,7 @@ export default function App() {
     containerRef.current?.scrollTo(0, containerRef.current.scrollHeight)
   }, [history])
 
-  const onClickAnywhere = () => {
-    inputRef.current?.focus()
-  }
+  const onClickAnywhere = () => inputRef.current?.focus()
 
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     const commands: string[] = history
