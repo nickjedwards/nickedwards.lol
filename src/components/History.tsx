@@ -1,6 +1,6 @@
 import Ps1 from './Ps1'
 
-import IHistory from '../types/History';
+import IHistory from '../types/History'
 
 type Props = {
   history: IHistory[]

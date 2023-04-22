@@ -7,7 +7,7 @@ import { useShell } from './context/ShellContext'
 
 export default function App() {
   const [value, setValue] = useState('')
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const {
     execute,
@@ -24,12 +24,12 @@ export default function App() {
 
   const onClickAnywhere = () => {
     inputRef.current?.focus()
-  };
+  }
 
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     const commands: string[] = history
       .map(({ command }) => command)
-      .filter((value: string) => value);
+      .filter((value: string) => value)
 
     if (event.key === 'c' && event.ctrlKey) {
       event.preventDefault()
@@ -49,14 +49,14 @@ export default function App() {
     }
 
     if (event.key === 'ArrowUp') {
-      event.preventDefault();
+      event.preventDefault()
 
       if (!commands.length) return
 
       const index: number = lastCommandIndex + 1
 
       if (index <= commands.length) {
-        setLastCommandIndex(index);
+        setLastCommandIndex(index)
         setValue(commands[commands.length - index])
       }
     }
@@ -69,11 +69,11 @@ export default function App() {
       const index: number = lastCommandIndex - 1
 
       if (index > 0) {
-        setLastCommandIndex(index);
-        setValue(commands[commands.length - index]);
+        setLastCommandIndex(index)
+        setValue(commands[commands.length - index])
       } else {
-        setLastCommandIndex(0);
-        setValue('');
+        setLastCommandIndex(0)
+        setValue('')
       }
     }
 
@@ -83,7 +83,7 @@ export default function App() {
       setHistory(execute(value))
       setValue('')
     }
-  };
+  }
 
   return (
     <div ref={containerRef} className="overflow-y-auto h-full p-2" onClick={onClickAnywhere}>

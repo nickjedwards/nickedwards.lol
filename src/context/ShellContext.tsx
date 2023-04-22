@@ -18,7 +18,7 @@ type Stderr = {
 }
 
 type Props = {
-  children: ReactElement;
+  children: ReactElement
 }
 
 const ShellContext = createContext<Context>({
@@ -31,7 +31,7 @@ const ShellContext = createContext<Context>({
 })
 
 export function useShell() {
-  return useContext(ShellContext);
+  return useContext(ShellContext)
 }
 
 export default function ShellProvider({ children }: Props) {
@@ -75,7 +75,7 @@ export default function ShellProvider({ children }: Props) {
       command,
       stdout,
     }
-  };
+  }
 
   return (
     <ShellContext.Provider
