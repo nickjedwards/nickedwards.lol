@@ -91,30 +91,28 @@ export default function App() {
       {/* Command history */}
       <History history={history} />
 
-      <div className="mt-4 font-medium text-sm">
-        <label htmlFor="prompt" className="flex space-x-2">
-          {/* PS1 */}
-          <div className="flex-shrink">
-            <Ps1 />
-          </div>
+      <label htmlFor="prompt" className="mt-4 flex items-center space-x-2">
+        {/* PS1 */}
+        <div className="flex-shrink">
+          <Ps1 />
+        </div>
 
-          {/* Prompt */}
-          <input
-            ref={inputRef}
-            id="prompt"
-            type="text"
-            className="flex-grow bg-fuchsia-950 text-white focus:outline-none"
-            aria-label="prompt"
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-            autoFocus
-            onKeyDown={onKeyDown}
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
-          />
-        </label>
-      </div>
+        {/* Prompt */}
+        <input
+          ref={inputRef}
+          id="prompt"
+          type="text"
+          className="flex-grow bg-fuchsia-950 font-medium text-white text-sm focus:outline-none"
+          aria-label="prompt"
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          autoFocus
+          onKeyDown={onKeyDown}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+        />
+      </label>
     </div>
   )
 }

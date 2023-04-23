@@ -7,14 +7,14 @@ export default function Motd() {
   const patch = new Intl.DateTimeFormat('en-US', { day: '2-digit' }).format(date)
 
   return (
-    <div>
+    <>
       <p className="font-medium text-white text-sm">
         Welcome to Nick Edwards {`${major}.${minor}.${patch}`} LOL (NJE/Edwards 5.6.91-generic x86_64)
       </p>
       <p
-        className="mt-4 text-white whitespace-pre-wrap"
+        className="mt-4 font-medium text-white text-sm whitespace-pre-wrap"
         dangerouslySetInnerHTML={{ __html: banner.run([]) }}
       />
-    </div>
+    </>
   )
 }

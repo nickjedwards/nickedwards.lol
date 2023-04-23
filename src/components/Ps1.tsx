@@ -5,10 +5,10 @@ export default function Ps1() {
 
   return (
     <>
-      <span className="text-green-500">guest@{hostname}</span>
-      <span className="text-white">:</span>
-      <span className="text-blue-500">~</span>
-      <span className="text-white">$</span>
+      <span className="font-medium text-green-500 text-sm">guest@{hostname}</span>
+      <span className="font-medium text-white text-sm">:</span>
+      <span className="font-medium text-blue-500 text-sm">~</span>
+      <span className="font-medium text-white text-sm">$</span>
     </>
   )
 }

@@ -10,17 +10,17 @@ export default function History({ history }: Props) {
   return (
     <>
       {history.map((command, index) => (
-        <div key={command.command + index}>
-          <div className="mt-4 flex space-x-2 font-medium text-sm">
+        <div key={command.id}>
+          <div className="mt-4 flex items-center space-x-2">
             <div className="flex-shrink">
               <Ps1 />
             </div>
 
-            <div className="flex-grow text-white">{command.command}</div>
+            <div className="flex-grow font-medium text-white text-sm">{command.command}</div>
           </div>
 
           <p
-            className="text-white whitespace-pre-wrap"
+            className="font-medium text-white text-sm whitespace-pre-wrap"
             dangerouslySetInnerHTML={{ __html: command.stdout }}
           />
         </div>
